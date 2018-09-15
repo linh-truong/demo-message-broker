@@ -1,0 +1,53 @@
+version: "3"
+services:
+
+  demo-rabbitmq:
+    image: "rabbitmq:3-management"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=rabbitmq
+      - RABBITMQ_DEFAULT_PASS=rabbitmq
+    networks:
+      - demo-network
+
+  demo-node1:
+    build:
+      context: ./node1
+      dockerfile: ./Dockerfile
+    restart: always
+    environment:
+      - RABBITMQ_URI=amqp://rabbitmq:rabbitmq@demo-rabbitmq
+    ports:
+      - "3001:3000"
+    depends_on:
+      - demo-rabbitmq
+    networks:
+      - demo-network
+    links:
+      - demo-rabbitmq
+
+  demo-node2:
+    build:
+      context: ./node2
+      dockerfile: ./Dockerfile
+    restart: always
+    environment:
+      - RABBITMQ_URI=amqp://rabbitmq:rabbitmq@demo-rabbitmq
+    ports:
+      - "3002:3000"
+    depends_on:
+      - demo-rabbitmq
+    networks:
+      - demo-network
+    links:
+      - demo-rabbitmq
+
+
+networks:
+  demo-network:
+    driver: bridge
+
+volumes:
+  demo-volumn:
