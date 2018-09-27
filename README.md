@@ -12,3 +12,6 @@
 ## Apache Kafka
   - [Introduction](https://kafka.apache.org/intro)
   - [Use cases](https://kafka.apache.org/uses)
+
+## When To Use RabbitMQ or Kafka
+  - [RabbitMQ or Kafka](https://content.pivotal.io/rabbitmq/understanding-when-to-use-rabbitmq-or-apache-kafka)
