@@ -25,7 +25,7 @@ amqp.connect(
   }
 );
 
-Kafka
+// Kafka
 var producer = new Kafka.Producer({
   connectionString: "localhost:9092"
 });
